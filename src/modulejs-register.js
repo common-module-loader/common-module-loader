@@ -85,6 +85,11 @@
             throw new Error('path is not a string');
         }
 
+        // 如果路径不包含冒号，则转换为path:path格式
+        if (path.indexOf(':') < 0) {
+            path = path + ':' + path;
+        }
+
         // 路径小写
         path = path.toLowerCase();
 

@@ -29,23 +29,49 @@
 
                 describe('modulejs.define', function () {
                     it('应该定义一个模块', function () {
-                        define('foo:foo', function (require, exports, module) {
-                            module.exports = 'foo';
+                        define('one:one', function (require, exports, module) {
+                            module.exports = 'one';
                         });
 
-                        expect(require('foo:foo')).toEqual('foo');
+                        expect(require('one:one')).toEqual('one');
                     });
 
                     it('重复定义一个模块会报错', function () {
                         expect(function () {
-                            define('foo:foo', function () {});
+                            define('one:one', function () {});
                         }).toThrow();
                     });
 
-                    it('模块名中必需含有冒号:', function () {
+                    it('定义模块的时候，模块名中必需含有冒号:', function () {
                         expect(function () {
-                            define('foo', function () {});
+                            define('single', function () {});
                         }).toThrow();
+                    });
+                });
+
+                describe('modulejs.require', function () {
+                    define('two:two', function (require, exports, module) {
+                        module.exports = Two;
+
+                        function Two() {
+                            this.name = 'two';
+                        }
+                    });
+
+                    it('应该加载一个模块', function () {
+                        var Two = require('two:two');
+
+                        expect(typeof Two).toEqual('function');
+                    });
+
+                    it('加载模块的时候，如果模块名不包含冒号，则表明使用path:path的模块名', function () {
+                        var Two = require('two');
+
+                        expect(typeof Two).toEqual('function');
+
+                        var two = new Two();
+
+                        expect(two.name).toEqual('two');
                     });
                 });
             });
