@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>modulejs-wrapped-importer</title>
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=yes" />
+        <script type="text/javascript" src="../src/modulejs.js"></script>
+        <script type="text/javascript" src="../src/modulejs-register.js"></script>
+        <script type="text/javascript" src="../src/modulejs-wrapped-importer.js"></script>
+        <script type="text/javascript" src="http://shallker.github.io/learn-jasmine/03-load-jasmine-2.0/load-jasmine-from-github.js"></script>
+    </head>
+    <body>
+        <script type="text/javascript">
+            describe('modulejs-wrapped-importer', function () {
+                it('应该存在 importJSON 方法', function () {
+                    expect(typeof modulejs.importJSON).toEqual('function');
+                });
+
+                it('应该存在 importModule 方法', function () {
+                    expect(typeof modulejs.importModule).toEqual('function');
+                });
+
+                describe('modulejs.importJSON', function () {
+                    modulejs.importJSON('./fixtures/project-foo-wrapped/modules.json', onImportJSON);
+
+                    function onImportJSON() {
+                        it('应该加载模块 foo:foo', function () {
+                            var Foo = require('foo:foo');
+                            var foo = new Foo();
+
+                            expect(typeof Foo).toEqual('function');
+                            expect(foo.name, 'foo');
+                        });
+
+                        it('应该加载模块 foo:lib/bar', function () {
+                            var Bar = require('foo:lib/bar');
+                            var bar = new Bar();
+
+                            expect(typeof Bar).toEqual('function');
+                            expect(bar.name, 'bar');
+                        });
+
+                        it('第二次重复加载应该报错', function () {
+                            expect(function () {
+                                modulejs.importJSON('./fixtures/project-foo-wrapped/modules.json');
+                            }).toThrow();
+                        });
+                    }
+                });
+
+            });
+        </script>
+    </body>
+</html>
