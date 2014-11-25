@@ -34,6 +34,22 @@ modulejs
 
 `window.require`
 
+## 加载模块时，如果模块路径不包含冒号，则转换为path:path格式
+```
+define('foo:foo', function (require, exports, module) {
+    module.exports = Foo;
+
+    function Foo() {
+        this.name = 'foo';
+    }
+});
+
+define('foo:bar', function (require, exports, module) {});
+
+// foo会自动转换为foo:foo
+var Foo = require('foo');
+var Bar = requrie('foo:bar');
+```
 
 ---
 
