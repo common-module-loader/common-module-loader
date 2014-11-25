@@ -1,4 +1,6 @@
 {
     "foo:foo": "./foo.js",
-    "foo:lib/bar": "./lib/bar.js"
+    "foo:lib/bar": "./lib/bar.js",
+    "CDOM:Event.js": "http://common-module.github.io/CDOM/src/Event.js",
+    "CDOM:EventTarget.js": "http://common-module.github.io/CDOM/src/EventTarget.js"
 }

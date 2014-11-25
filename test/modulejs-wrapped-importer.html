@@ -40,6 +40,12 @@
                             expect(bar.name, 'bar');
                         });
 
+                        it('应该加载远程模块 CDOM:Event', function () {
+                            var Event = require('CDOM:Event');
+
+                            expect(typeof Event).toEqual('function');
+                        });
+
                         it('第二次重复加载应该报错', function () {
                             expect(function () {
                                 modulejs.importJSON('./fixtures/project-foo-wrapped/modules.json');
@@ -47,7 +53,6 @@
                         });
                     }
                 });
-
             });
         </script>
     </body>

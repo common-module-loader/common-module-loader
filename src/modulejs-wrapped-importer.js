@@ -84,7 +84,7 @@
 
                     scriptElement.type = 'text/javascript';
 
-                    if (modulePath.indexOf('http') > 0) {
+                    if (modulePath.indexOf('http') > -1) {
                         // 绝对路径的模块
                         scriptElement.src = modulePath;
                     } else {
