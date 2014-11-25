@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Test</title>
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=yes" />
+        <script type="text/javascript" src="../src/module-manager.js"></script>
+        <script type="text/javascript" src="http://shallker.github.io/util/src/assert.js"></script>
+    </head>
+    <body>
+        <script type="text/javascript">
+            /**
+             * 第二次require应该不再执行module函数，应该有缓存
+             */
+            var assert = require('util:assert.js');
+
+            define('test:foo', function (require, exports, module) {
+                if (window.firstExecution) {
+                    throw new Error('second execution');
+                }
+
+                window.firstExecution = true;
+
+                module.exports = foo;
+
+                function foo() {
+                    return 'foo';
+                }
+            });
+
+            // 第一次require
+            var foo = require('test:foo');
+
+            assert.equal(foo(), 'foo', '第一次 require ok');
+
+            // 第二次require
+            var secondFoo = require('test:foo');
+
+            assert.equal(foo, secondFoo, '第二次 require ok');
+            assert.equal(secondFoo(), 'foo', '第二次 require ok');
+        </script>
+    </body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Test</title>
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=yes" />
+        <script type="text/javascript" src="../src/module-manager.js"></script>
+    </head>
+    <body>
+        <script type="text/javascript">
+            define('test:foo.js', function (require, exports, module) {
+                module.exports = function () {
+                    console.log('foo.js');
+                }
+            });
+
+            define('test:bar.js', function (require, exports, module) {
+                var foo = require('test:foo.js');
+
+                function bar() {
+                    foo();
+                    console.log('bar.js');
+                }
+
+                module.exports = bar;
+            });
+
+            var bar = require('test:bar.js');
+
+            bar();
+        </script>
+    </body>
+</html>

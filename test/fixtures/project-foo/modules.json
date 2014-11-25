@@ -1,0 +1,4 @@
+{
+    "foo:foo": "./foo.js",
+    "foo:lib/bar": "./lib/bar.js"
+}

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Test</title>
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=yes" />
+        <script type="text/javascript" src="../src/module-register.js"></script>
+        <script type="text/javascript" src="http://shallker.github.io/util/src/assert.js"></script>
+    </head>
+    <body>
+        <script type="text/javascript">
+            var assert = require('util:assert.js');
+
+            /**
+             * 第二次require应该不再执行module函数，应该有缓存
+             */
+            assert.equal(typeof define, 'function', '存在define');
+            assert.equal(typeof require, 'function', '存在require');
+        </script>
+    </body>
+</html>

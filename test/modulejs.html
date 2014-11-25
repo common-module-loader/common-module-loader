@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>modulejs</title>
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=yes" />
+        <script type="text/javascript" src="../src/modulejs.js"></script>
+        <script type="text/javascript" src="http://shallker.github.io/util/src/assert.js"></script>
+    </head>
+    <body>
+        <script type="text/javascript">
+            var assert = require('util:assert.js');
+
+            /**
+             * 第二次require应该不再执行module函数，应该有缓存
+             */
+            assert.equal(typeof modulejs, 'object', '存在全局的`modulejs`对象');
+            assert.equal(typeof modulejs.define, 'function', '存在`modulejs.define`函数');
+            assert.equal(typeof modulejs.require, 'function', '存在`modulejs.require`函数');
+
+            assert.equal(typeof define, 'function', '存在全局的`define`函数');
+            assert.equal(typeof require, 'function', '存在全局的`require`函数');
+        </script>
+    </body>
+</html>
