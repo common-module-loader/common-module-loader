@@ -2,20 +2,47 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Test</title>
+        <title>modulejs-register</title>
         <meta name="viewport" content="initial-scale=1.0, user-scalable=yes" />
-        <script type="text/javascript" src="../src/module-register.js"></script>
-        <script type="text/javascript" src="http://shallker.github.io/util/src/assert.js"></script>
+        <script type="text/javascript" src="../src/modulejs.js"></script>
+        <script type="text/javascript" src="../src/modulejs-register.js"></script>
+        <script type="text/javascript" src="http://shallker.github.io/learn-jasmine/03-load-jasmine-2.0/load-jasmine-from-github.js"></script>
     </head>
     <body>
         <script type="text/javascript">
-            var assert = require('util:assert.js');
+            describe('modulejs-register', function () {
+                it('应该存在 define 方法', function () {
+                    expect(typeof modulejs.define).toEqual('function');
+                });
 
-            /**
-             * 第二次require应该不再执行module函数，应该有缓存
-             */
-            assert.equal(typeof define, 'function', '存在define');
-            assert.equal(typeof require, 'function', '存在require');
+                it('应该存在 require 方法', function () {
+                    expect(typeof modulejs.require).toEqual('function');
+                });
+
+                it('应该存在全局 define 方法', function () {
+                    expect(typeof define).toEqual('function');
+                });
+
+                it('应该存在全局 require 方法', function () {
+                    expect(typeof require).toEqual('function');
+                });
+
+                describe('modulejs.define', function () {
+                    it('应该定义一个模块', function () {
+                        define('foo:foo', function (require, exports, module) {
+                            module.exports = 'foo';
+                        });
+
+                        expect(require('foo:foo')).toEqual('foo');
+                    });
+
+                    it('重复定义一个模块会报错', function () {
+                        expect(function () {
+                            define('foo:foo', function () {});
+                        }).toThrow();
+                    });
+                });
+            });
         </script>
     </body>
 </html>

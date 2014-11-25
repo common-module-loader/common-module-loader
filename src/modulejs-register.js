@@ -1,4 +1,3 @@
-
 /**
  * modulejs-register
  * 模块注册器
@@ -52,6 +51,11 @@
         // 参数检测，module
         if (typeof module !== 'function') {
             throw new Error('module is not a function');
+        }
+
+        // 如果模块已经被定义过
+        if (typeof moduleStore[path] !== 'undefined') {
+            throw new Error('already defined module');
         }
 
         path = path.toLowerCase();
