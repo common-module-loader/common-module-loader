@@ -41,6 +41,12 @@
                             define('foo:foo', function () {});
                         }).toThrow();
                     });
+
+                    it('模块名中必需含有冒号:', function () {
+                        expect(function () {
+                            define('foo', function () {});
+                        }).toThrow();
+                    });
                 });
             });
         </script>

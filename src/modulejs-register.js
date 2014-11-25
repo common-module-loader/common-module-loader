@@ -58,6 +58,11 @@
             throw new Error('already defined module');
         }
 
+        // 模块名称定义中必需含有冒号:
+        if (path.indexOf(':') < 0) {
+            throw new Error('invalid module define');
+        }
+
         path = path.toLowerCase();
 
         moduleStore[path] = module;
