@@ -4,6 +4,22 @@ modulejs
 模块化JS实现
 
 
+## 加载modulejs
+```
+// 基础模块
+http://common-module.github.io/modulejs/src/modulejs.js
+
+// 注册模块
+http://common-module.github.io/modulejs/src/modulejs-register.js
+
+// 加载模块
+http://common-module.github.io/modulejs/src/modulejs-importer.js
+
+// 包裹后的加载模块
+http://common-module.github.io/modulejs/src/modulejs-wrapped-importer.js
+```
+
+
 ## modulejs.define
 定义一个模块
 
