@@ -67,6 +67,11 @@ var Foo = require('foo');
 var Bar = requrie('foo:bar');
 ```
 
+
+## Todo
+- Rename modulejs to common-module-laoder
+
+
 ---
 
 Copyright (c) 2014 Shallker Wang - MIT License (enclosed)
